@@ -1,0 +1,39 @@
+    
+    <form>
+     <div class="panel panel-info">
+      <div class="panel-heading">
+         <h1 class="title">Novo Fornecedor</h1>
+        <!--- Alerta de erro -->
+        <div *ngIf="exibir">
+            <div class="alert alert-danger alert-dismissable fade-in" role="alert"  >
+                <button type="button" class="close" data-dismiss="alert" aria-label="close"> 
+                <span aria-hidden="true">&times;</span>
+                </button>
+                  <h4 class="error">Algo deu errado !!!</h4>
+                  <p class="error">{{errorMessage}}</p>
+            </div>
+        </div>
+        <!--- Alerta de erro -->
+      </div>
+      <div class="panel-body">
+      <div class="form-group has-success">
+        <label for="name" class="radio-user">Nome</label>
+        <input #nome type="text" class="form-control" id="name" required>
+      </div>
+      <div class="form-group has-success">
+        <label for="email" class="radio-user">E-mail</label>
+        <input #email type="email" class="form-control" id="email">
+      </div>
+       <div class="form-group has-success">
+        <label for="fone" class="radio-user">Fone</label>
+        <input #fone type="phone" class="form-control" id="fone">
+      </div>
+            <br>
+       <div class="panel-footer">
+       <button type="submit" class="btn btn-success btn-lg" (click)= "postFornecedor(nome.value, email.value, fone.value)">Salvar</button>
+      </div>
+     </div>
+     </div>
+    </form>
+  
+     

@@ -1,0 +1,19 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+     <div class="container">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav">  
+        <li><a class="navbar-brand" routerLink="/home" routerLinkActive="active">Home</a></li>
+        <li><a routerLink="/usuario" routerLinkActive="active">Usuários</a></li>
+        <li><a routerLink="/fornecedores" routerLinkActive="active">Fornecedores</a></li>
+
+      </ul>
+  </div>
+  <ul class="nav navbar-nav navbar-right">  
+       <li><a class="navbar-brand" routerLink="/usuario/{id}" routerLinkActive="active">{{ (af.auth | async)?.auth.email }}</a></li>
+       <li><a href="" (click)="logout()" class="navbar-link navbar-brand">Sair</a></li>
+   </ul>
+  </div>
+</nav>
+<div class="caixa">
+<router-outlet></router-outlet>
+</div>

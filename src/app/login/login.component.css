@@ -1,0 +1,18 @@
+.title{
+  text-align: center;
+  font-size: 4rem;
+}
+.title-input{
+  font-size: 2rem;
+}
+.body-list{
+  text-align: left;
+  font-size: 1.5rem;
+}
+.caixa-login{
+  padding-right: 25%;
+  padding-left: 25%;
+  padding-top: 25%;
+  margin-right: auto;
+  margin-left: auto;
+}

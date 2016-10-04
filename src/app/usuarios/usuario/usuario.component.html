@@ -1,0 +1,62 @@
+    
+    <form>
+     <div class="panel panel-info">
+      <div class="panel-heading">
+         <h1 class="title">Novo Usuario</h1>
+        <!--- Alerta de erro -->
+        <div *ngIf="exibir">
+            <div class="alert alert-danger alert-dismissable fade-in" role="alert"  >
+                <button type="button" class="close" data-dismiss="alert" aria-label="close"> 
+                <span aria-hidden="true">&times;</span>
+                </button>
+                  <h4 class="error">Algo deu errado !!!</h4>
+                  <p class="error">{{errorMessage}}</p>
+            </div>
+        </div>
+        <!--- Alerta de erro -->
+      </div>
+      <div class="panel-body">
+      <div class="form-group has-success">
+        <label for="name" class="radio-user">Nome</label>
+        <input #nome type="text" class="form-control" id="name" required>
+      </div>
+      <div class="form-group has-success">
+        <label for="email" class="radio-user">E-mail</label>
+        <input #email type="email" class="form-control" id="email">
+      </div>
+       <div class="form-group has-success">
+        <label for="senha" class="radio-user">Senha</label>
+        <input #senha type="password" class="form-control" id="senha">
+      </div>
+       <!-- Tipo de perfil -->   
+      <h4>Perfil</h4>
+      <label class="checkbox-inline radio-user">
+      <input #perfil type="radio" id="usuario" name="perfil" value="Usuario" checked> 
+      Requisitante
+      </label>
+       <label class="checkbox-inline radio-user">
+      <input #perfil type="radio" id="atendente" name="perfil" value="Atendente"> 
+      Atendente
+      </label>
+       <label class="checkbox-inline radio-user" >
+      <input #perfil type="radio" id="administrador"  name="perfil" value="Administrador"> 
+      Administrador
+      </label>
+      <h4>Status</h4>
+      <label class="checkbox-inline radio-user">
+      <input #status type="radio" id="ativado" name="status" value="Ativado"> 
+      Ativado
+      </label>
+       <label class="checkbox-inline radio-user">
+      <input #status type="radio" id="desativado" name="status" value="Desativado" checked> 
+      Desativado
+      </label>
+         </div>
+            <br>
+       <div class="panel-footer">
+       <button type="submit" class="btn btn-success btn-lg" (click)= "postUsuario(nome.value, email.value, senha.value, perfil.value, status.value)">Salvar</button>
+      </div>
+     </div>
+    </form>
+  
+     
