@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import  *  as firebase from  'firebase';
-
+import { AngularFire, AuthProviders, AuthMethods, AngularFireAuth } from 'angularfire2';
 import {Router} from '@angular/router';
 
 
@@ -10,9 +10,10 @@ export class LoginService {
   public userProfile: any;
 public useremail: any;
 public uid: any;
+public onlogin:boolean = false;
 
 
-  constructor(private _router: Router) {
+  constructor(public route: Router, public auth1: AngularFireAuth, public af: AngularFire) {
        var config = {
        apiKey: "AIzaSyDGphb-T2s-7n5tkThc8tAWuNJLBMoq-lw",
         authDomain: "appcmdb-2ca72.firebaseapp.com",
@@ -23,6 +24,7 @@ public uid: any;
        firebase.initializeApp(config);
       this.fireAuth = firebase.auth();
       this.userProfile = firebase.database().ref('/userProfile');   
+
     }
   loginUser(email: string, password: string): any {
     return this.fireAuth.signInWithEmailAndPassword(email, password);
@@ -55,14 +57,20 @@ public uid: any;
   }
 
  logoutUser(): any{
-   return this.fireAuth.signOut();
+     this.af.auth.logout();
  }
  islogin(){
+ if (this.onlogin == false) {
+      console.log("não logado");
+      this.route.navigate(['']);     
+    }
+
+ }
+ /*
   firebase.auth().onAuthStateChanged(function(user) {
    if (user==null) {
       console.log("não logado");
-      this._router.navigate(['']);     
+      this.route.navigate(['']);     
     }
-})
+})*/
  }
-}

@@ -7,7 +7,6 @@ import { HomeComponent} from './home/home.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { LoginComponent } from './login/login.component';
-import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 import { FornecedorComponent } from './fornecedores/fornecedor/fornecedor.component';
 
 
@@ -17,7 +16,6 @@ const appRoutes: Routes =  [
     { path: 'usuario', component: UsuariosComponent },
     { path: 'novousuario', component: UsuarioComponent },
     { path: '', component:LoginComponent},
-    {path: 'fornecedores', component: FornecedoresComponent} ,
     {path: 'fornecedor', component: FornecedorComponent} 
 
 

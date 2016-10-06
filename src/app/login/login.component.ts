@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
-
 import { LoginService } from './login.service';
 
 @Component({
@@ -12,25 +11,33 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent  {
   displayname;
-   constructor(public af: AngularFire,  private _router: Router, public authData: LoginService) {
-  firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          this.displayname = user.email;
-       this._router.navigate(['home']);     
-         } else {
-      console.log("não logado");
-      this._router.navigate(['']);     
-     }
-   } )
+  erroMsg;  
+  exibir: boolean = false;
+   constructor(public af: AngularFire,  public route: Router, public authData: LoginService) {
+    
   }
   ngOnInit() {
-    
+    if (this.authData.onlogin == false) {
+      console.log("não logado");
+      this.route.navigate(['']);     
+    }else{
+      this.route.navigate(['home'])
+    }
   }   
   login(email, senha) {
-      this.authData.loginUser(email, senha).then( AuthData => {
-      this._router.navigate(['home']);      
-    }, error => {
-  })
-}
+      this.af.auth.login({email: email, password: senha},
+      {
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password,
+       }).then(auth => {
+      this.route.navigate(['home']);
+      this.authData.onlogin=true;
+      }, error =>{
+          this.erroMsg = error.message;
+          this.exibir = true;
+
+      })      
+    }
+
 
 }

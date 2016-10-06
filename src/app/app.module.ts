@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { AngularFireModule } from 'angularfire2';
 import * as firebase from 'firebase';
+import {Ng2PaginationModule} from 'ng2-pagination';
 
 
 import { AppComponent } from './app.component';
@@ -15,10 +16,7 @@ import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { UsuariosService } from './usuarios/usuarios.service';
-import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 import { FornecedorComponent } from './fornecedores/fornecedor/fornecedor.component';
-import {AuthFireService } from './auth-fire.service';
-import {ImportsService } from './imports.service';
 
 
 export const firebaseConfig = {
@@ -37,7 +35,6 @@ export const firebaseConfig = {
     UsuariosComponent,
     UsuarioComponent,
     LoginComponent,
-    FornecedoresComponent,
     FornecedorComponent
   ],
   imports: [
@@ -45,9 +42,10 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     routing,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    Ng2PaginationModule
   ],
-  providers: [appRoutingProviders,LoginService, UsuariosService, AuthFireService, ImportsService],
+  providers: [appRoutingProviders,LoginService, UsuariosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
