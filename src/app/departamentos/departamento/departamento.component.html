@@ -1,0 +1,124 @@
+<!--Inicio das Lista de Fornecedores-->
+<div *ngIf="!active">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h1 *ngIf="!edit" class="title">Novo Fornecedor</h1>
+      <h1 *ngIf="edit" class="title">Editar Fornecedor</h1>
+    </div>
+
+    <div class="panel-body">
+      <form (ngSubmit)="onSubmit()" #formFornecedor="ngForm">
+
+        <div class="form-group">
+          <label for="nome" class="radio-user">Nome</label>
+          <input #nome='ngModel' type="text" class="form-control" id="nome" required [(ngModel)]="fornecedor.nome"
+                 name="nome">
+          <div [hidden]="nome.valid || nome.pristine"
+               class="alert alert-danger">
+            Nome é obrigatório
+          </div>
+        </div>
+        <div class="form-group ">
+          <label for="email" class="radio-user">E-mail</label>
+          <input #email='ngModel' type="email" class="form-control" id="email" required [(ngModel)]="fornecedor.email"
+                 name="email">
+        </div>
+        <div class="form-group">
+          <label for="fone" class="radio-user">Fone</label>
+          <input #fone='ngModel' type="tel" class="form-control" id="fone" [(ngModel)]="fornecedor.fone" name="fone">
+        </div>
+        <div class="panel-footer">
+          <button id="salvar" *ngIf="!edit" type="submit" class="btn btn-success btn-lg"
+                  [disabled]="!formFornecedor.form.valid"
+                  (click)="postFornecedor(); formFornecedor.form.reset(); active=!active">Salvar Registro
+          </button>
+          <button id="editar" *ngIf="edit" type="submit" class="btn btn-success btn-lg"
+                  [disabled]="!formFornecedor.form.valid"
+                  (click)="editFornecedor(fornecedor.$key, fornecedor); formFornecedor.form.reset(); active=!active">
+            Alterar Registro
+          </button>
+          <button type="button" class="btn btn-danger btn-lg"
+                  (click)="active=!active; edit=!edit; formFornecedor.form.reset()">Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--Incio do formulario de cadastro dos fornecedores-->
+<div *ngIf="active">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-8">
+          <h1 class="title">Lista Fornecedores</h1>
+        </div>
+        <div class="col-md-4 search">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                      <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+            </span>
+            <input type="text" class="form-control" placeholder="Search for...">
+          </div><!-- /input-group -->
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <thead class="theader">
+        <tr class="head-list">
+          <td>Nome</td>
+          <td>E-mail</td>
+          <td>Fone</td>
+          <td>Opções</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="body-list" *ngFor="let fornecedor of fornecedores | async ">
+          <td>{{fornecedor.nome}}</td>
+          <td>{{fornecedor.email}}</td>
+          <td>{{fornecedor.fone}}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"
+                    (click)="updateFornecedor(fornecedor); active=!active">
+              <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" aria-label="Left Align"
+                    data-toggle="modal" data-target="#myModal">
+              <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+            <!--Inicio do modal de confirmação da exclusão do registro-->
+            <div class="modal" id="myModal"  tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="alert alert-danger" role="alert">
+                  <h4>Você realmente deseja excluir cadastro do</h4> <h3>{{fornecedor.nome}}?</h3>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" (click)="deleteFornecedor(fornecedor.$key)" data-dismiss="modal">OK</button>
+                </div>
+                </div>
+              </div>
+              </div>
+            <!--fim do modal-->
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel-footer">
+      <button type="button" class="btn btn-success btn-lg" aria-label="Center Align" (click)="active=!active">
+        Novo Fornecedor
+      </button>
+    </div>
+  </div>
+</div>
+<!-----/fazer paginação/--->
+
+
